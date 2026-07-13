@@ -1,5 +1,6 @@
 package netlify.zidcode.SpringBootCore;
 
+import netlify.zidcode.SpringBootCore.DependencyInjection.OrderService;
 import netlify.zidcode.SpringBootCore.PaymentSystem.CreditCard;
 import netlify.zidcode.SpringBootCore.PaymentSystem.UPI;
 import netlify.zidcode.SpringBootCore.Student.Student;
@@ -13,11 +14,14 @@ public class SpringBootCoreApplication {
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(SpringBootCoreApplication.class, args);
 
-		Student student = context.getBean(Student.class);
+		OrderService orderService = context.getBean(OrderService.class);
+		orderService.placeOrder();
 
-		student.setAge(22);
-		student.setName("Mazid Khan");
-		System.out.println(student.getName());
-		System.out.println(student.getAge());
+//		Student student = context.getBean(Student.class);
+//
+//		student.setAge(22);
+//		student.setName("Mazid Khan");
+//		System.out.println(student.getName());
+//		System.out.println(student.getAge());
 	}
 }

@@ -1,9 +1,9 @@
-package netlify.zidcode.SpringBootCore;
+package netlify.zidcode.SpringBootCore.PaymentSystem;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class CreditCard implements PaymentService{
+public class CreditCard implements PaymentService {
     @Override
     public void pay() {
         System.out.println("Paying via Card");

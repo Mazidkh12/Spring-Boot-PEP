@@ -1,4 +1,4 @@
-package netlify.zidcode.SpringBootCore;
+package netlify.zidcode.SpringBootCore.Student;
 
 public class Stundent {
     private String name;

@@ -2,7 +2,7 @@ package netlify.zidcode.SpringBootCore;
 
 import netlify.zidcode.SpringBootCore.PaymentSystem.CreditCard;
 import netlify.zidcode.SpringBootCore.PaymentSystem.UPI;
-import netlify.zidcode.SpringBootCore.Student.Stundent;
+import netlify.zidcode.SpringBootCore.Student.Student;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -11,10 +11,13 @@ import org.springframework.context.ApplicationContext;
 public class SpringBootCoreApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootCoreApplication.class, args);
+		ApplicationContext context = SpringApplication.run(SpringBootCoreApplication.class, args);
 
-		Stundent std1 = new Stundent("Mazid Khan", 22);
-		System.out.println(std1.getAge());
-		System.out.println(std1.getName());
+		Student student = context.getBean(Student.class);
+
+		student.setAge(22);
+		student.setName("Mazid Khan");
+		System.out.println(student.getName());
+		System.out.println(student.getAge());
 	}
 }

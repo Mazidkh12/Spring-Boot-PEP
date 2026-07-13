@@ -1,14 +1,16 @@
 package netlify.zidcode.SpringBootCore.Student;
 
-public class Stundent {
+import org.springframework.stereotype.Component;
+
+@Component
+public class Student {
     private String name;
     private int age;
 
-    public Stundent() {
-
+    public Student() {
     }
 
-    public Stundent(String name, int age) {
+    public Student(String name, int age) {
         this.name = name;
         this.age = age;
     }

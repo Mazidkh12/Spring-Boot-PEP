@@ -19,7 +19,7 @@ public class StudentService {
         int id = student.getId();
         String name = student.getName();
         int age = student.getAge();
-        String dept = student.getDepartment();
+        String dept = student.getDept();
 
         if(id<0 || name==null || age<0 || dept==null || name.isBlank() || dept.isBlank()) {
             return null;
@@ -45,7 +45,7 @@ public class StudentService {
 
         existing.setName(student.getName());
         existing.setAge(student.getAge());
-        existing.setDepartment(student.getDepartment());
+        existing.setDept(student.getDept());
         existing.setUpdatedAt(LocalDateTime.now());
 
         return studentRepository.save(existing);

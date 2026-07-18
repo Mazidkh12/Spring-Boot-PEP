@@ -14,7 +14,7 @@ public class Student {
     private int id;
     private String name;
     private int age;
-    private String department;
+    private String dept;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -42,12 +42,12 @@ public class Student {
         this.age = age;
     }
 
-    public String getDepartment() {
-        return department;
+    public String getDept() {
+        return dept;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setDept(String dept) {
+        this.dept = dept;
     }
 
     public LocalDateTime getCreatedAt() {

@@ -14,8 +14,8 @@ public class SpringBootCoreApplication {
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(SpringBootCoreApplication.class, args);
 
-		OrderService orderService = context.getBean(OrderService.class);
-		orderService.placeOrder();
+//		OrderService orderService = context.getBean(OrderService.class);
+//		orderService.placeOrder();
 
 //		Student student = context.getBean(Student.class);
 //

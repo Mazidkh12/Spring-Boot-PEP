@@ -1,5 +1,7 @@
 package netlify.zidcode.SpringBootCore.StudentServer.Controller;
 
+import netlify.zidcode.SpringBootCore.StudentServer.DTO.RequestStudentDTO;
+import netlify.zidcode.SpringBootCore.StudentServer.DTO.ResponseStudentDTO;
 import netlify.zidcode.SpringBootCore.StudentServer.Entity.Student;
 import netlify.zidcode.SpringBootCore.StudentServer.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,45 +15,49 @@ public class StudentController {
     StudentService studentService;
 
     @Autowired
-    public StudentController(StudentService studentService){
+    public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Student> storeStudent(@RequestBody Student student){
-        Student result = studentService.studentValidate(student);
-        if(result==null){
-            return ResponseEntity.status(400).body(result);
+    public ResponseEntity<?> storeStudent(@RequestBody RequestStudentDTO requestStudentDTO) {
+        ResponseStudentDTO result = studentService.studentValidate(requestStudentDTO);
+
+        if(result == null)
+        {
+            return ResponseEntity.status(400).body("Invalid input");
         }
-        return ResponseEntity.status(201).body(result);
+        return  ResponseEntity.status(201).body(result);
     }
 
-    @GetMapping("/get/{id}")
-    public ResponseEntity<?> getStudentById(@PathVariable int id){
+    @GetMapping("/getStudent/{id}")
+    public ResponseEntity<?> getStudentById(@PathVariable int id) throws Exception {
+
         Student student = studentService.getStudentById(id);
-        return ResponseEntity.status(200).body(student);
-    }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateStudentById(@PathVariable int id, @RequestBody Student student){
-        Student updatedStudent = studentService.updateStudentById(id, student);
-
-        if(updatedStudent == null){
-            return ResponseEntity.status(404).body("student not found");
-        }
-
-        return ResponseEntity.status(200).body(updatedStudent);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteStudentById(@PathVariable int id){
-        boolean deleted = studentService.deleteStudentById(id);
-
-        if(!deleted){
+        if(student == null){
             return ResponseEntity.status(404).body("Student not found");
         }
 
-        return ResponseEntity.status(200).body("Student deleted successfully");
+        return ResponseEntity.ok(student);
     }
 
+    @PutMapping("/updateStudent/{id}")
+    public ResponseEntity<?> updateStudent(@PathVariable int id, @RequestBody Student student){
+        Student result = studentService.studentUpdate(id, student);
+        if(result == null)
+        {
+            return ResponseEntity.status(400).body("Invalid input");
+        }
+        return ResponseEntity.status(200).body(result);
+    }
+
+    @DeleteMapping("/deleteStudent/{id}")
+    public ResponseEntity<?> deleteStudent(@PathVariable int id){
+        Student student = studentService.deleteStudent(id);
+        if(student == null) {
+            return ResponseEntity.status(400).body("Invalid input");
+        }
+        return ResponseEntity.status(200).body("Student deleted");
+    }
 }

@@ -1,7 +1,9 @@
 package netlify.zidcode.SpringBootCore.StudentServer.Controller;
 
+import jakarta.validation.Valid;
 import netlify.zidcode.SpringBootCore.StudentServer.DTO.RequestStudentDTO;
 import netlify.zidcode.SpringBootCore.StudentServer.DTO.ResponseStudentDTO;
+import netlify.zidcode.SpringBootCore.StudentServer.DTO.UpdateStudentResponseDTO;
 import netlify.zidcode.SpringBootCore.StudentServer.Entity.Student;
 import netlify.zidcode.SpringBootCore.StudentServer.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +22,12 @@ public class StudentController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> storeStudent(@RequestBody RequestStudentDTO requestStudentDTO) {
-        ResponseStudentDTO result = studentService.studentValidate(requestStudentDTO);
+    public ResponseEntity<ResponseStudentDTO> storeStudent(
+            @RequestBody RequestStudentDTO dto) {
 
-        if(result == null)
-        {
-            return ResponseEntity.status(400).body("Invalid input");
-        }
-        return  ResponseEntity.status(201).body(result);
+        ResponseStudentDTO result = studentService.studentValidate(dto);
+
+        return ResponseEntity.status(201).body(result);
     }
 
     @GetMapping("/getStudent/{id}")
@@ -43,8 +43,8 @@ public class StudentController {
     }
 
     @PutMapping("/updateStudent/{id}")
-    public ResponseEntity<?> updateStudent(@PathVariable int id, @RequestBody Student student){
-        Student result = studentService.studentUpdate(id, student);
+    public ResponseEntity<?> updateStudent(@PathVariable int id, @Valid @RequestBody Student student){
+        UpdateStudentResponseDTO result = studentService.studentUpdate(id, student);
         if(result == null)
         {
             return ResponseEntity.status(400).body("Invalid input");

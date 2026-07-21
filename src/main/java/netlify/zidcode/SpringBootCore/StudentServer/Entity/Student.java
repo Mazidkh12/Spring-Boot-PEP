@@ -23,8 +23,17 @@ public class Student {
     @NotBlank(message = "Department cannot be empty")
     @Size(min = 2, max = 50, message = "Department must be between 2 and 50 characters")
     private String dept;
+    private String email;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public int getId() {
         return id;

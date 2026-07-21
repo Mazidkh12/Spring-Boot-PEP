@@ -10,5 +10,6 @@ public class ResponseStudentDTO {
     private String name;
     private int age;
     private String department;
+    private String email;
 }
 
